@@ -40,8 +40,16 @@ class Whitening(TransformerMixin, BaseEstimator):
 
     """
 
-    def __init__(self, eps=1e-6, method='zca_cor', z_scoring=True, copy=True):
+    def __init__(
+        self,
+        n_components=2,
+        eps=1e-6,
+        method='zca_cor',
+        z_scoring=True,
+        copy=True
+    ):
 
+        self.n_components = n_components
         self.eps = eps
         self.method = method
         self.z_scoring = z_scoring
@@ -100,6 +108,7 @@ class Whitening(TransformerMixin, BaseEstimator):
 
         return W
 
+    # TODO: Truncate eigenvalues to num components.
     def _zca_cor(self, X, Sigma):
 
         # The square-root of the diagonal variance matrix.
