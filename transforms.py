@@ -133,8 +133,7 @@ class Whitening(TransformerMixin, BaseEstimator):
 
         return np.dot(X, np.transpose(self.W))
 
-    @staticmethod
-    def _check_X(X):
+    def _check_X(self, X):
         # Perform type checking and formatting of data matrix.
 
         if self.copy:
