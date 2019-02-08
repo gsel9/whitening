@@ -29,27 +29,16 @@ from sklearn.base import TransformerMixin, BaseEstimator
 
 class Whitening(TransformerMixin, BaseEstimator):
     """Perform a whiten transformation of a data matrix.
-
     Args:
-
         center (bool): Perform mean centering of X.
         eps (float): Whitening constant preventing division by zero.
         method (str): Whitening transformation method. Select one of 'zca',
             'zca_cor', 'pca', 'pca_cor', or 'cholesky'.
         corr (bool): Determine to calculate ZCA or ZCA-cor matrix.
-
     """
 
-    def __init__(
-        self,
-        n_components=2,
-        eps=1e-6,
-        method='zca_cor',
-        z_scoring=True,
-        copy=True
-    ):
+    def __init__(self, eps=1e-6, method='zca_cor', z_scoring=True, copy=True):
 
-        self.n_components = n_components
         self.eps = eps
         self.method = method
         self.z_scoring = z_scoring
@@ -61,10 +50,8 @@ class Whitening(TransformerMixin, BaseEstimator):
         """
         Args:
             X (array-like): The data matrix.
-
         Returns:
             (array-like): The transformation matrix.
-
         """
         X = self._check_X(X)
 
@@ -108,7 +95,6 @@ class Whitening(TransformerMixin, BaseEstimator):
 
         return W
 
-    # TODO: Truncate eigenvalues to num components.
     def _zca_cor(self, X, Sigma):
 
         # The square-root of the diagonal variance matrix.
